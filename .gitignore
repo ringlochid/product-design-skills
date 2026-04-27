@@ -1,0 +1,12 @@
+# Python/runtime noise
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# OS/editor noise
+.DS_Store
+*~
+
+# Local generated artifacts
+.tmp/
+artifacts/
