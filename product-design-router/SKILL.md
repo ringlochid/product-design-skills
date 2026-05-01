@@ -17,9 +17,9 @@ Workflow:
 1. State product idea/request, audience, stage, and output need.
 2. Pick effort: quick, standard, or promotion concept.
 3. Choose one first lane unless the request truly spans stages.
-4. Route full, real, industry-level, or promotion-ready concept packages to `product-design-workflow`; quick UI concepts stay on the Stitch lane.
+4. Route full, real, industry-level, or promotion-ready concept packages to `product-design-workflow` as a phase orchestrator; quick UI concepts stay on the Stitch lane.
 5. Name optional downstream lanes only when they add evidence or visual clarity.
-6. For leaf asks, stop at the handoff boundary; do not pretend one leaf is enough for a promotion package.
+6. For conductor asks, name first leaf phase and handoff packet; for leaf asks, stop at the boundary and do not pretend one leaf is enough for a promotion package.
 
 Output:
 - selected lane(s)

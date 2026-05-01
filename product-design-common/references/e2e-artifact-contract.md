@@ -4,7 +4,7 @@ Folder: `product-design-<product-slug>-<YYYYMMDDTHHMMSSZ>/`.
 
 Promotion-style concept runs use this exact shape. If caller filenames conflict, flag the conflict and follow this contract.
 
-Skeleton first via `create_product_design_skeleton.py`; run `check_source_readiness.py` before images/UI. Honest `degraded`/`blocked` beats incomplete polish.
+Skeleton first via `create_product_design_skeleton.py`; phase status via `check_phase_status.py`; source/previsual gate via `check_source_readiness.py`. Honest `degraded`/`blocked` beats incomplete polish.
 
 Required files/folders:
 - `00-run-manifest.md`: `request_summary`, `product_slug`, `timestamp`, `workflow_kind`, `requested_outputs`, `ui_concept_requested`, `run_status`, `ui_concept_artifact_present`, `ui_concept_verdict`, `sources`, `standards`, `assumptions_gaps`, `downstream_target`
@@ -29,4 +29,4 @@ Conditional:
 - `14-source-link-check.txt` with `VERDICT=PASS` is required when `promotion_eligible: true`.
 - Dead/blocked links may be recorded as gaps but cannot support promotion.
 
-Finalization order: write/update report, handoff, and verdict before optional polish; if promoting, save `check_source_links.py <folder>` output to `14-source-link-check.txt`; run `check_product_design_run.py <folder>` before declaring done. The checker writes `13-artifact-check.txt`; do not hand-patch test results. If time is tight, prefer final checks over extra polish and report exact degraded/blocked gaps.
+Finalization order: conductor resumes from `check_phase_status.py`; leaf lanes produce bounded thinking artifacts; conductor copies them into contract files and gates. Write/update report, handoff, and verdict before slow media; if promoting, save `check_source_links.py <folder>` output to `14-source-link-check.txt`; run `check_product_design_run.py <folder>` before declaring done. The checker writes `13-artifact-check.txt`; do not hand-patch test results.

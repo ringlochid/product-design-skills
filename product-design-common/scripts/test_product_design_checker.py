@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[2]
 CHECKER = ROOT / "product-design-common" / "scripts" / "check_product_design_run.py"
 SKELETON = ROOT / "product-design-common" / "scripts" / "create_product_design_skeleton.py"
 SOURCE_READY = ROOT / "product-design-common" / "scripts" / "check_source_readiness.py"
+PHASE_STATUS = ROOT / "product-design-common" / "scripts" / "check_phase_status.py"
 
 
 def png(path: Path, w: int = 2048, h: int = 1152) -> None:
@@ -159,6 +160,19 @@ def add_ui(path: Path, *, rendered: bool = True, blocked: bool = False) -> None:
         png(p / "local-viewport.png", 390, 844)
 
 
+def phase(path: Path) -> str:
+    result = subprocess.run([sys.executable, str(PHASE_STATUS), str(path)], text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    return result.stdout
+
+
+def require_phase(path: Path, expected_phase: str, expected_status: str) -> None:
+    out = phase(path)
+    if f"PHASE={expected_phase}" not in out or f"STATUS={expected_status}" not in out:
+        print(f"FAIL phase_status expected {expected_phase}/{expected_status}")
+        print(out)
+        raise SystemExit(1)
+
+
 def run_case(name: str, expect_ok: bool, setup) -> None:
     tmp = Path(tempfile.mkdtemp(prefix=f"pd-checker-{name}-"))
     try:
@@ -199,6 +213,8 @@ def main() -> None:
             print(readiness.stdout)
             raise SystemExit(1)
         print("PASS source_readiness_blocks_skeleton")
+        require_phase(tmp, "evidence", "blocked")
+        print("PASS phase_status_blocks_skeleton_at_evidence")
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
 
@@ -206,12 +222,28 @@ def main() -> None:
         base_fixture(d, run_status="pass", ui_present=True, ui_verdict="pass", promotion=True)
         add_ui(d)
     run_case("promotion_pass_minimal", True, promotion_pass)
+    tmp_phase = Path(tempfile.mkdtemp(prefix="pd-phase-complete-"))
+    try:
+        promotion_pass(tmp_phase)
+        require_phase(tmp_phase, "complete", "complete")
+        print("PASS phase_status_complete_after_final_checker")
+    finally:
+        shutil.rmtree(tmp_phase, ignore_errors=True)
 
     def missing_images(d: Path) -> None:
         base_fixture(d, run_status="pass", ui_present=True, ui_verdict="pass", promotion=True)
         shutil.rmtree(d / "09-concept-images")
         add_ui(d)
     run_case("missing_rich_images_blocks_promotion", False, missing_images)
+    tmp_phase = Path(tempfile.mkdtemp(prefix="pd-phase-visuals-"))
+    try:
+        promotion_pass(tmp_phase)
+        for img in (tmp_phase / "09-concept-images").glob("*.png"):
+            img.unlink()
+        require_phase(tmp_phase, "visuals", "ready")
+        print("PASS phase_status_routes_missing_images_to_visuals")
+    finally:
+        shutil.rmtree(tmp_phase, ignore_errors=True)
 
     def fake_ui(d: Path) -> None:
         base_fixture(d, run_status="pass", ui_present=True, ui_verdict="pass", promotion=True)

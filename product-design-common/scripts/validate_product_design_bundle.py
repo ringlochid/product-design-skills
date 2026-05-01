@@ -12,7 +12,7 @@ EXPECTED_SKILLS = {
     'product-design-handoff'
 }
 EXPECTED_REFS = {
-    'product-design-workflow': {'product-design-contract.md','industry-quality-bar.md','e2e-artifact-contract.md','karpathy-product-design-rules.md','standards-and-sources.md','stitch-concept-rules.md','safety-boundaries.md'},
+    'product-design-workflow': {'product-design-contract.md','industry-quality-bar.md','e2e-artifact-contract.md','phase-orchestration.md','karpathy-product-design-rules.md','standards-and-sources.md','stitch-concept-rules.md','safety-boundaries.md'},
     'product-design-router': {'product-design-contract.md','routing-matrix.md','industry-quality-bar.md','safety-boundaries.md'},
     'market-context-reader': {'product-design-contract.md','market-context-rules.md','safety-boundaries.md','output-shapes.md','standards-and-sources.md'},
     'product-concept-brief': {'product-design-contract.md','market-context-rules.md','output-shapes.md','safety-boundaries.md'},
@@ -154,7 +154,8 @@ for p in refs_dir.glob('*.md'):
 sentinels={
     refs_dir/'product-design-contract.md':['Stitch','design-skills','Coding skills','Marketing/GTM','product-design-workflow','launch region/beachhead','strongest direct opponent','novelty delta'],
     refs_dir/'industry-quality-bar.md':['WCAG 2.2','UI concept','degraded','HTML','screenshots','whole user problem','success criteria','ui_concept_artifact_present','ui_concept_verdict','launch region/beachhead','AI wrapper','Visual-region gate'],
-    refs_dir/'e2e-artifact-contract.md':['00-run-manifest.md','13-artifact-check.txt','09-ui-concept','scorecard table','ui_concept_artifact_present','beachhead','strongest direct opponent','novelty delta','geography drift'],
+    refs_dir/'e2e-artifact-contract.md':['00-run-manifest.md','13-artifact-check.txt','09-ui-concept','scorecard table','ui_concept_artifact_present','beachhead','strongest direct opponent','novelty delta','geography drift','check_phase_status.py'],
+    refs_dir/'phase-orchestration.md':['orchestrator','router','context packet','file manager','Leaf responsibilities','resume','final_audit'],
     refs_dir/'karpathy-product-design-rules.md':['evidence before confidence','verify before saying done'],
     refs_dir/'standards-and-sources.md':['Double Diamond','NN/g','WCAG 2.2','GOV.UK Design System','GOV.UK Service Standard/Manual','Empathize','Australian Government Style Manual','Australian Digital Experience Policy','Digital Service Standard','NSW Design System','Queensland Government Design System','US Web Design System','Canada GC Design System','18F Methods','Apple HIG','Material Design','Atlassian Design System','IBM Carbon','not copied layouts','component source','Canvas Planner/API','MyStudyLife','TigerPath'],
     refs_dir/'market-context-rules.md':['source claim','signal','inference','assumption','Canvas student planner','launch region/beachhead','strongest direct opponent','kill_or_pivot_condition'],

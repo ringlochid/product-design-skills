@@ -5,30 +5,29 @@ description: Conduct promotion-style concept packages with evidence, story, rich
 
 # Product Design Workflow
 
-Use for full, real, industry-level, or promotion-ready concept packages. This is the conductor; leaf skills handle individual stages.
+Use for full, real, industry-level, or promotion-ready concept packages. This is a thin conductor: router, context sharer, file manager, and phase gate. Leaf skills do the thinking.
 
 Read first:
 - `../product-design-common/references/product-design-contract.md`
 - `../product-design-common/references/industry-quality-bar.md`
 - `../product-design-common/references/e2e-artifact-contract.md`
+- `../product-design-common/references/phase-orchestration.md`
 - `../product-design-common/references/karpathy-product-design-rules.md`
 - `../product-design-common/references/standards-and-sources.md`
 - `../product-design-common/references/stitch-concept-rules.md`
 - `../product-design-common/references/safety-boundaries.md`
 
 Workflow:
-1. Create `product-design-<product-slug>-<timestamp>/` and follow the promotion concept artifact contract exactly.
-2. **Skeleton first, enforced:** before research, images, UI, or checker inspection, run `python3 product-design-common/scripts/create_product_design_skeleton.py <folder> --slug <product-slug> --request "<request summary>"`. This creates every required file/folder with honest draft content, including critique, report, handoff, and promotion verdict files.
-3. Keep the skeleton defaults until evidence proves otherwise: `run_status: degraded`, `promotion_eligible: false`, and honest UI fields.
-4. Set `workflow_kind: promotion_concept`; record `ui_concept_requested`, `ui_concept_artifact_present`, and `ui_concept_verdict` honestly.
-5. Write the default evidence pack and structured market wedge before solution work: beachhead segment, excluded users, use moment, opponents/workarounds, pain rows, novelty delta hypothesis, and market gate verdict.
-6. Write sources, standards map, golden workflow, synthesis, concept brief, presentation story, journey, and screen spec with stable `story_moment_id` and `screen_id` values.
-7. **Source gate before visuals/UI:** run `python3 product-design-common/scripts/check_source_readiness.py <folder>`. Do not call image generation or create UI concept artifacts until it passes. If it fails and time is tight, keep the skeleton degraded/blocked and finalize honestly.
-8. **First complete pass before polish:** update critique/report/handoff/verdict from the current evidence before generating extra variants. A complete degraded package beats an incomplete polished package.
-9. Generate and critique real, readable `gpt-image-2` presentation visuals: hero, storyboard, and selected key screens mapped to story/screen IDs.
-10. Enter the Stitch/HTML lane by default for a UI concept artifact; record real artifacts/screenshots or the exact blocker in `09-ui-concept`. Screenshots must show the rendered concept, not a blank/error/404 browser page.
-11. Review Apple/HIG-level clarity, WCAG, source-truth match, screenshot sanity, image/UI coherence, novelty, customer pull, risk, and evidence.
-12. Finalize deterministically before any extra polish: if `promotion_eligible: true`, run `product-design-common/scripts/check_source_links.py <folder>` and save stdout as `14-source-link-check.txt`; then run `product-design-common/scripts/check_product_design_run.py <folder>`. The checker writes `13-artifact-check.txt` itself. Stop after final checks and report pass/degraded/blocked rather than continuing refinements.
+1. Create `product-design-<product-slug>-<timestamp>/`; run `python3 product-design-common/scripts/create_product_design_skeleton.py <folder> --slug <product-slug> --request "<request summary>"` before any thinking work.
+2. Run `python3 product-design-common/scripts/check_phase_status.py <folder>` at the start of every turn/resume and after each leaf output; continue only from the reported phase.
+3. Treat the conductor as file manager only: write context packets, call/route one leaf lane, copy its bounded output into the contract files, then gate. Do not personally research, design, critique, and render everything in one pass.
+4. Keep skeleton defaults until a gate proves otherwise: `run_status: degraded`, `promotion_eligible: false`, `ui_concept_artifact_present`, and `ui_concept_verdict`.
+5. Evidence phase: route market/source/opportunity work to leaves; assemble sources, standards, market wedge, story, journey, and screen spec with stable `story_moment_id`/`screen_id` values.
+6. Previsual gate: run `check_source_readiness.py <folder>`. If it fails or time is tight, update critique/report/handoff/verdict as degraded and stop cleanly.
+7. Degraded finalize phase: before slow media, update critique, concept report, handoff, and promotion verdict files from current evidence so the package is complete even without visuals/UI.
+8. Visual phase: generate exactly the required `gpt-image-2` hero, storyboard, and key-screen assets plus manifest/critique; no extra variants before gate pass.
+9. UI phase: route to `stitch-concept-generator`; record real HTML/screenshots or exact blocker in `09-ui-concept`.
+10. Final audit: route critique/handoff to leaves if needed, run source-link check only when promoting, then run `check_product_design_run.py <folder>`; stop after pass/degraded/blocked status.
 
 Output:
 - run folder path
