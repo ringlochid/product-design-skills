@@ -18,6 +18,20 @@ Promotion concept flow:
 product-design-workflow → evidence pack → market wedge → story → rich images → UI concept → critique → promotion verdict → handoff
 ```
 
+## Example output
+
+A black-box test run produced **LeaseLens NSW**, a consumer-information concept for NSW renters reviewing a draft lease before signing. It turns lease clauses into source-backed risk cards and an “ask before signing” checklist. It is not legal advice.
+
+[Open the curated example folder](examples/leaselens-nsw/) or view the local [HTML UI concept](examples/leaselens-nsw/ui-concept.html).
+
+| Rich storyboard | Key-screen concept |
+|---|---|
+| ![LeaseLens NSW storyboard](examples/leaselens-nsw/assets/storyboard.jpg) | ![LeaseLens NSW key screen](examples/leaselens-nsw/assets/key-screen.jpg) |
+
+| Desktop UI concept | Mobile UI concept |
+|---|---|
+| ![LeaseLens NSW desktop UI concept](examples/leaselens-nsw/assets/ui-desktop.jpg) | ![LeaseLens NSW mobile UI concept](examples/leaselens-nsw/assets/ui-mobile.png) |
+
 ## Public skills
 
 - `product-design-workflow` — conduct promotion-ready concept packages with sources, standards, rich images, UI concept evidence, critique, and handoff.

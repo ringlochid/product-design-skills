@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>LeaseLens NSW — UI Concept</title>
+<style>
+:root{--bg:#101820;--panel:#f7f3ea;--ink:#14212b;--muted:#63717a;--blue:#2a6f97;--amber:#b86b00;--red:#b3261e;--green:#287d4f;--line:#d7d0c2;--focus:#84c5ff}*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(135deg,#101820,#1b2a35);color:#f7f3ea}a{color:#1a5f86}button,.button{border:0;border-radius:999px;padding:.85rem 1.05rem;background:var(--blue);color:white;font-weight:800;box-shadow:0 8px 22px rgba(0,0,0,.2)}button.secondary{background:#e8dfcf;color:var(--ink)}button:focus,a:focus{outline:3px solid var(--focus);outline-offset:3px}.shell{max-width:1220px;margin:0 auto;padding:28px}.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;min-height:560px}.kicker{color:#94d2ff;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.title{font-size:clamp(44px,7vw,82px);line-height:.92;margin:.3rem 0}.subtitle{font-size:22px;color:#d9e4ea;max-width:650px}.disclaimer{border:1px solid rgba(255,255,255,.22);border-radius:18px;padding:14px 16px;color:#fff3d6;background:rgba(184,107,0,.18);margin:22px 0}.grid{display:grid;grid-template-columns:280px 1fr 340px;gap:18px}.card{background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:24px;padding:22px;box-shadow:0 20px 45px rgba(0,0,0,.16)}.card.dark{background:#162734;color:#f7f3ea;border-color:#2d4658}.nav{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}.nav span{border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:8px 12px}.label{font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}.risk{display:flex;align-items:flex-start;gap:12px;padding:14px;border:1px solid var(--line);border-radius:18px;margin:12px 0;background:#fffbf4}.chip{font-size:13px;font-weight:900;border-radius:999px;padding:6px 9px;white-space:nowrap}.chip.high{background:#ffe2df;color:var(--red);border:1px solid #f2aaa4}.chip.med{background:#fff1d4;color:var(--amber);border:1px solid #e0b771}.chip.info{background:#dff1ff;color:#164f73;border:1px solid #99cdea}.source{font-size:13px;color:var(--muted)}.textarea{border:2px dashed #a99f90;border-radius:18px;min-height:160px;padding:18px;background:#fff;color:#51616b}.ask{display:grid;gap:12px}.ask li{margin:9px 0}.screenid{font-weight:900;color:#9bd2ff}.footer{margin:26px 0;color:#b7c6ce}.mobilebar{display:none}@media(max-width:920px){.hero,.grid{grid-template-columns:1fr}.shell{padding:18px}.mobilebar{display:block}.title{font-size:48px}}
+</style>
+</head>
+<body>
+<main class="shell">
+<section class="hero" id="LL-01-Landing">
+  <div>
+    <div class="kicker screenid">LL-01-Landing</div>
+    <h1 class="title">LeaseLens NSW</h1>
+    <p class="subtitle">Read risky-looking lease clauses, bond duties, repairs obligations, and the questions worth asking before you sign.</p>
+    <div class="disclaimer"><strong>Consumer information — not legal advice.</strong> Source cards point to NSW renting information and flag when human review is safer.</div>
+    <div class="nav"><span>NSW only</span><span>Bond</span><span>Repairs</span><span>Special conditions</span><span>Ask before signing</span></div>
+    <button>Start a lease risk review</button> <button class="secondary">See privacy note</button>
+  </div>
+  <aside class="card dark">
+    <div class="label">Use moment</div>
+    <h2>24 hours before signing</h2>
+    <p>Designed for renters who found a place and need a calm, source-backed checklist before paying or signing.</p>
+    <p class="source">No official endorsement implied. Confirm current rules with NSW sources.</p>
+  </aside>
+</section>
+
+<section class="grid" aria-label="Lease review workspace">
+  <aside class="card" id="LL-02-UploadReview">
+    <div class="label screenid">LL-02-UploadReview</div>
+    <h2>Upload / paste lease</h2>
+    <p><strong>Privacy first:</strong> redact signatures, ID numbers, and unnecessary personal details.</p>
+    <div class="textarea">Paste NSW lease text here…</div>
+    <p><label><input type="checkbox" checked> This is a NSW residential tenancy agreement</label></p>
+    <button>Analyze clauses</button>
+  </aside>
+
+  <section class="card" id="LL-03-RiskReview">
+    <div class="label screenid">LL-03-RiskReview</div>
+    <h2>Lease Risk Review</h2>
+    <div class="risk"><span class="chip high">High review</span><div><strong>Special conditions</strong><p>Extra cleaning, access, or break-fee wording may need clarification. Ask for written examples and source basis.</p><p class="source">Source: NSW renting rules · confidence medium</p></div></div>
+    <div class="risk"><span class="chip med">Medium</span><div><strong>Bond</strong><p>Check lodgement, claim process, and condition report alignment before paying.</p><p class="source">Source: NSW rental bonds · confidence high</p></div></div>
+    <div class="risk"><span class="chip info">Info</span><div><strong>Repairs</strong><p>Separate urgent repairs, non-urgent repairs, and tenant-caused damage in your notes.</p><p class="source">Source: NSW repairs and maintenance · confidence high</p></div></div>
+  </section>
+
+  <aside class="card" id="LL-04-ClauseDetail">
+    <div class="label screenid">LL-04-ClauseDetail</div>
+    <h2>Clause detail</h2>
+    <p><strong>What this touches:</strong> repairs, access, and condition evidence.</p>
+    <p><strong>Plain English:</strong> this may affect who pays, how fast repairs happen, and what proof you need.</p>
+    <p><strong>Ask before signing:</strong> “Can you confirm in writing how urgent repairs and existing defects will be handled?”</p>
+    <p class="source">Needs human review if the clause changes standard obligations.</p>
+  </aside>
+</section>
+
+<section class="card" id="LL-05-AskList" style="margin-top:18px">
+  <div class="label screenid">LL-05-AskList</div>
+  <h2>Ask before signing</h2>
+  <div class="ask">
+    <ul>
+      <li><strong>Bond:</strong> Can you confirm the bond lodgement method and timing?</li>
+      <li><strong>Repairs:</strong> Can existing defects be added to the condition report before move-in?</li>
+      <li><strong>Special conditions:</strong> Which clauses add obligations beyond the standard agreement?</li>
+      <li><strong>Human review:</strong> If an answer changes money, access, or termination rights, seek tenancy advice.</li>
+    </ul>
+  </div>
+  <button>Export question list</button> <button class="secondary">Copy NSW source links</button>
+</section>
+<p class="footer">UI concept artifact only. Labels, flows, and content need legal, accessibility, and user validation before external promotion.</p>
+</main>
+</body>
+</html>
