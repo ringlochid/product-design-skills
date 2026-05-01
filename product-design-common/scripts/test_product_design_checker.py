@@ -195,6 +195,12 @@ def main() -> None:
         write(d / "14-source-link-check.txt", "VERDICT=FAIL")
     run_case("source_link_fail_blocks_promotion", False, source_fail)
 
+    def missing_artifact_check_is_generated(d: Path) -> None:
+        base_fixture(d, run_status="pass", ui_present=True, ui_verdict="pass", promotion=True)
+        (d / "13-artifact-check.txt").unlink()
+        add_ui(d)
+    run_case("missing_artifact_check_is_generated", True, missing_artifact_check_is_generated)
+
     def honest_not_ready(d: Path) -> None:
         base_fixture(d, run_status="blocked", ui_present=False, ui_verdict="blocked", promotion=False)
         add_ui(d, blocked=True)

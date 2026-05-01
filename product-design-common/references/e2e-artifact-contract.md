@@ -27,4 +27,4 @@ Conditional:
 - `14-source-link-check.txt` with `VERDICT=PASS` is required when `promotion_eligible: true`.
 - Dead/blocked links may be recorded as gaps but cannot support promotion.
 
-Run `check_product_design_run.py <folder>` before declaring done; run `check_source_links.py <folder>` before promotion.
+Finalization order: write report/handoff/verdict; if promoting, save `check_source_links.py <folder>` output to `14-source-link-check.txt`; run `check_product_design_run.py <folder>` before declaring done. The checker writes `13-artifact-check.txt`; do not hand-patch test results. If time is tight, prefer final checks over extra polish and report exact degraded/blocked gaps.

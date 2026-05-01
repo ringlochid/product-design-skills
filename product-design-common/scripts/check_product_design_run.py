@@ -26,9 +26,10 @@ REQUIRED_FILES = [
     "10-critique.md",
     "11-concept-report.md",
     "12-handoff.md",
-    "13-artifact-check.txt",
     "15-promotion-verdict.md",
 ]
+
+ARTIFACT_CHECK_REL = "13-artifact-check.txt"
 
 MANIFEST_FIELDS = [
     "request_summary",
@@ -348,11 +349,6 @@ require_terms("11-concept-report.md", report, ["research basis", "market wedge",
 handoff = read("12-handoff.md")
 require_terms("12-handoff.md", handoff, ["artifact inventory", "source-truth", "decisions", "risks", "open questions", "missing evidence", "assumptions", "downstream lane", "promotion verdict"])
 
-artifact_check = read("13-artifact-check.txt")
-require_terms("13-artifact-check.txt", artifact_check, ["required files", "manifest fields", "market wedge", "beachhead", "strongest direct opponent", "novelty delta", "opponents", "pain signals", "concept images", "storyboard", "key screens", "UI concept", "stitch attempt", "presentation", "report", "sources", "standards", "verdict"])
-if ui_claimed_success:
-    require_terms("13-artifact-check.txt", artifact_check, ["ui_concept_core_flow_demonstrated", "ui_concept_quality_verdict"])
-
 promotion = read("15-promotion-verdict.md")
 require_terms("15-promotion-verdict.md", promotion, ["promotion_eligible", "promotion_scope", "source links", "concept images", "UI concept", "visual/a11y", "independent audit", "verdict"])
 promotion_eligible = status_value(field(promotion, "promotion_eligible")) in {"true", "yes", "pass"}
@@ -370,22 +366,51 @@ if promotion_eligible:
     if run_status != "pass":
         errors.append("promotion_eligible true requires run_status: pass")
 
-if errors:
-    print("FAIL")
-    for e in errors:
-        print(f"- {e}")
-    if warnings:
-        print("WARN")
-        for w in warnings:
-            print(f"- {w}")
-    sys.exit(1)
+def artifact_check_report(verdict: str) -> list[str]:
+    missing = ", ".join(sorted(missing_required)) if missing_required else "none"
+    ui_flow = "pass" if ui_claimed_success and ui_artifacts and ui_screenshots else ("not_claimed" if not ui_claimed_success else "fail")
+    ui_quality = ui_verdict or "unknown"
+    return [
+        f"VERDICT={verdict}",
+        f"required files: {'pass' if not missing_required else 'fail'}; missing={missing}",
+        "manifest fields: checked",
+        "market wedge: checked",
+        f"beachhead: {beachhead or 'checked'}",
+        "strongest direct opponent: checked",
+        "novelty delta: checked",
+        "opponents: checked",
+        "pain signals: checked",
+        "concept images: checked",
+        "storyboard: checked",
+        "key screens: checked",
+        "UI concept: checked",
+        "stitch attempt: checked",
+        "presentation: checked",
+        "report: checked",
+        "sources: checked",
+        "standards: checked",
+        f"ui_concept_core_flow_demonstrated: {ui_flow}",
+        f"ui_concept_quality_verdict: {ui_quality}",
+        f"run_status={run_status or 'unknown'}",
+        f"ui_concept_artifact_present={ui_present or 'unknown'}",
+        f"ui_concept_verdict={ui_verdict or 'unknown'}",
+        f"promotion_eligible={str(promotion_eligible).lower()}",
+        f"verdict: {verdict}",
+    ]
 
-print("PASS")
-print(f"run_status={run_status or 'unknown'}")
-print(f"ui_concept_artifact_present={ui_present or 'unknown'}")
-print(f"ui_concept_verdict={ui_verdict or 'unknown'}")
-print(f"promotion_eligible={str(promotion_eligible).lower()}")
+verdict = "FAIL" if errors else "PASS"
+lines = [verdict]
+if errors:
+    lines.extend(f"- {e}" for e in errors)
 if warnings:
-    print("WARN")
-    for w in warnings:
-        print(f"- {w}")
+    lines.append("WARN")
+    lines.extend(f"- {w}" for w in warnings)
+lines.extend(artifact_check_report(verdict))
+
+try:
+    (ROOT / ARTIFACT_CHECK_REL).write_text("\n".join(lines) + "\n")
+except Exception as exc:
+    lines.append(f"WARN: could not write {ARTIFACT_CHECK_REL}: {exc}")
+
+print("\n".join(lines))
+sys.exit(1 if errors else 0)
