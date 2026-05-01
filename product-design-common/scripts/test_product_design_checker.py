@@ -11,6 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 CHECKER = ROOT / "product-design-common" / "scripts" / "check_product_design_run.py"
+SKELETON = ROOT / "product-design-common" / "scripts" / "create_product_design_skeleton.py"
 
 
 def png(path: Path, w: int = 2048, h: int = 1152) -> None:
@@ -173,6 +174,27 @@ def run_case(name: str, expect_ok: bool, setup) -> None:
 
 
 def main() -> None:
+    def skeleton_bootstrap(d: Path) -> None:
+        result = subprocess.run([sys.executable, str(SKELETON), str(d), "--slug", "Fixture", "--request", "Fixture request"], text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        if result.returncode != 0:
+            print(result.stdout)
+            raise SystemExit(result.returncode)
+        required = ["00-run-manifest.md", "01-sources.md", "10-critique.md", "11-concept-report.md", "12-handoff.md", "15-promotion-verdict.md", "09-concept-images/manifest.md", "09-ui-concept/stitch-attempt.md"]
+        missing = [rel for rel in required if not (d / rel).exists()]
+        if missing:
+            print(f"FAIL skeleton_bootstrap: missing {missing}")
+            raise SystemExit(1)
+        checker = subprocess.run([sys.executable, str(CHECKER), str(d)], text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        if "missing required file" in checker.stdout:
+            print(checker.stdout)
+            raise SystemExit(1)
+        print("PASS skeleton_bootstrap_creates_contract_shape")
+    tmp = Path(tempfile.mkdtemp(prefix="pd-checker-skeleton-bootstrap-"))
+    try:
+        skeleton_bootstrap(tmp)
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
+
     def promotion_pass(d: Path) -> None:
         base_fixture(d, run_status="pass", ui_present=True, ui_verdict="pass", promotion=True)
         add_ui(d)

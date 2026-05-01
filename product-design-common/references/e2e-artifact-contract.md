@@ -4,7 +4,7 @@ Folder: `product-design-<product-slug>-<YYYYMMDDTHHMMSSZ>/`.
 
 Promotion-style concept runs use this exact shape. If caller filenames conflict, flag the conflict and follow this contract.
 
-Create all required files/folders first as a timeout-safe skeleton, then refine. Honest `degraded`/`blocked` beats incomplete polish.
+Create all required files/folders first as a timeout-safe skeleton, then refine. Use `product-design-common/scripts/create_product_design_skeleton.py` before research/images/UI. Honest `degraded`/`blocked` beats incomplete polish.
 
 Required files/folders:
 - `00-run-manifest.md`: `request_summary`, `product_slug`, `timestamp`, `workflow_kind`, `requested_outputs`, `ui_concept_requested`, `run_status`, `ui_concept_artifact_present`, `ui_concept_verdict`, `sources`, `standards`, `assumptions_gaps`, `downstream_target`

@@ -4,7 +4,7 @@ Product-design turns market/customer/product intent into an evidence-backed prom
 
 ## Lifecycle
 
-For full promotion concept runs, create a complete timeout-safe skeleton before polishing. Required end-state files should exist early with honest `degraded`/`blocked` status, then improve as evidence and artifacts land.
+For full promotion concept runs, create a complete timeout-safe skeleton before research or polishing, preferably with `create_product_design_skeleton.py`. Required end-state files should exist early with honest `degraded`/`blocked` status, then improve as evidence and artifacts land.
 
 1. Clarify audience, problem, outcome, and use moment.
 2. Lock launch region/beachhead, beachhead segment, excluded users, and local constraints before solution claims.
