@@ -73,8 +73,9 @@ if counts["C"] < 2:
 
 required_market_fields = [
     "beachhead_segment", "launch_region", "use_moment", "excluded_users", "local_constraints",
-    "opponent_map", "strongest_direct_opponent", "pain_evidence_status", "market_gate_verdict",
-    "novelty_delta_hypothesis", "not_the_novelty",
+    "opponent_map", "strongest_direct_opponent", "why_users_choose_opponent_today", "opponent_coverage_gap",
+    "pain_evidence_status", "customer_pull_signal", "market_gate_verdict", "kill_or_pivot_condition",
+    "novelty_delta_hypothesis", "delta_against_opponent", "not_the_novelty",
 ]
 for field in required_market_fields:
     match = re.search(rf"(?im)^\s*`?{re.escape(field)}`?\s*:\s*(.+?)\s*$", market_text)
@@ -86,6 +87,22 @@ for field in required_market_fields:
 
 if re.search(r"(?i)skeleton only|pending source|pending opponent|pending;|launch region pending", market_text):
     errors.append("06-market-wedge.md still contains skeleton/pending language before images/UI")
+if not re.search(r"(?is)opponent_map.*\bdirect\b", market_text):
+    errors.append("06-market-wedge.md opponent_map must include direct opponent before images/UI")
+if not re.search(r"(?is)opponent_map.*\b(workaround|indirect)\b", market_text):
+    errors.append("06-market-wedge.md opponent_map must include workaround/indirect alternative before images/UI")
+
+supporting_docs = {
+    "02-standards.md": ["Double Diamond", "d.school", "NN/g", "WCAG 2.2", "privacy", "data feasibility"],
+    "06-presentation-story.md": ["story_moment_id", "problem", "insight", "idea", "key moments", "proof", "slide"],
+    "08-screen-spec.md": ["Stitch", "responsive", "accessibility", "privacy", "data", "state", "key screens"],
+}
+for rel, terms in supporting_docs.items():
+    text = read(ROOT / rel)
+    low = text.lower()
+    for term in terms:
+        if term.lower() not in low:
+            errors.append(f"{rel} missing pre-visual term: {term}")
 
 if errors:
     print("FAIL")
