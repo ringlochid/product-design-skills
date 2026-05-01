@@ -12,17 +12,19 @@ Read first:
 - `../product-design-common/references/market-context-rules.md`
 - `../product-design-common/references/safety-boundaries.md`
 - `../product-design-common/references/output-shapes.md`
+- `../product-design-common/references/standards-and-sources.md`
 
 Workflow:
 1. Identify audience, market category, competitor set, and decision use.
 2. Read supplied notes/docs/source briefs; use public sources only when needed.
 3. Extract constraints, opportunities, competitor patterns, and claim caveats.
-4. Separate fact, source claim, signal, and inference.
-5. Stop when context is enough for product framing.
+4. Separate fact, source claim, signal, inference, and assumption.
+5. Capture source URLs/dates and standards that affect decisions.
+6. Stop when context is enough for product framing.
 
 Output:
 - market/context scope
-- key evidence and citations
+- key evidence, citations, and standards used
 - competitor/customer patterns
 - assumptions and missing input
 - positioning/marketing risks

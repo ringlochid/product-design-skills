@@ -1,68 +1,44 @@
 # Output Shapes
 
-## Router plan
-- Request/stage
-- Effort: quick | standard | deep | concept-prototype
-- Selected lane(s)
-- Chain if end-to-end
-- Assumptions, evidence needed, risks/blocked conditions
+Default compact shape:
+- result / verdict
+- evidence used
+- risks and assumptions
+- next action
 
-Example: vague app idea + visual request → context, brief, opportunity, journey, spec, Stitch, review, handoff.
+Promotion concept run shape follows `e2e-artifact-contract.md` exactly. Do not invent alternate numbered chains for full runs.
 
-## Market context
-- Category/audience
-- Competitor/reference patterns
-- Customer signals
-- Constraints
-- Evidence/citations
-- Assumptions and positioning risks
+Status values:
+- `pass`
+- `fail`
+- `degraded`
+- `blocked`
 
-Example: competitor pricing + customer complaint → cite both; separate fact from signal.
+Use `degraded` when the concept is useful but not promotion-ready because evidence, source verification, image quality, UI concept proof, or user/integration validation is missing. Use `blocked` when a requested external/tool step could not run. Use `fail` when an artifact exists but is fake, contradictory, or unsafe to promote.
 
-## Concept brief
-- User/job
-- Problem
-- Value proposition
-- Constraints/non-goals
-- Success criteria
-- Assumptions, evidence gaps, risks
+Keep proof fields separate:
+- `ui_concept_artifact_present`: rendered/exported file exists
+- `ui_concept_core_flow_demonstrated`: rendered output shows the promised job
+- `ui_concept_quality_verdict`: visual/source-truth/a11y status
+- `promotion_eligible`: independent readiness verdict from `15-promotion-verdict.md`
 
-## Opportunity frame
-- Outcome
-- Opportunities
-- Solution hypotheses
-- Validation tests
-- Recommendation
-- Evidence, assumptions, risks
+Concept image output:
+- image/storyboard/key-screen prompt
+- provider/model, explicitly `gpt-image-2`
+- output path and actual image artifact path
+- `story_moment_id` and `screen_id` mapping when relevant
+- dimensions, critique verdict, and `not_ui_proof: true`
+- blocker reason only when generation fails; this is not completion
 
-Good opportunity = user pain. Bad opportunity = "add dashboard".
+Presentation/report output:
+- deck storyline and slide intent
+- written report with research basis, rationale, standards, feasibility, risks, assumptions, validation plan
+- judge communication clarity and idea quality before visual polish
 
-## Journey / page spec
-- Trigger → steps → decisions → success/failure
-- States
-- Friction/trust risks
-- Evidence/assumptions
-- Page goal, hierarchy, actions, data, responsive intent
-- Risks/missing evidence
-
-## Review
-- Verdict: accept | revise concept | regenerate concept | hand off | blocked
-- Evidence used
-- Severity findings
-- Positioning/marketing risks
-- Assumptions/missing evidence
-- Next action
-
-Example: major — hero overpromises autonomy; revise value prop before Stitch.
-
-## Handoff
-- Source-truth summary
-- Concept artifacts
-- UX/positioning risks
-- Open questions
-- Assumptions/missing evidence
-- Recommended downstream lane
-
-Example degraded Stitch handoff: no execution; include prompt, intended screen, assumptions, lane.
-
-Generated Stitch screens are concept evidence, not source truth.
+Review output:
+- standard
+- status
+- evidence
+- severity
+- action item
+- next validation step

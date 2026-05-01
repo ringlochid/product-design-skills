@@ -1,38 +1,21 @@
 # Stitch Concept Rules
 
-Stitch is allowed here as a quick visual backend for concept illustration.
+Use Stitch/HTML as the default lightweight visual backend for a UI concept artifact. It illustrates a concept; it is not a validated product prototype or implementation proof.
 
-## Minimum viable input
+For promotion-style concept work:
+- write `08-screen-spec.md` with stable `screen_id` values, hierarchy, states, data, copy intent, and risky claims
+- create `09-ui-concept/stitch-attempt.md`
+- record adapter command, confirmation state, status, artifact paths, screenshots, metadata, and exact blocker
+- if external Stitch generation is authorized, invoke the adapter with confirmation; otherwise record the approval/preflight blocker
+- if artifacts exist, include HTML/export plus local viewport and full-page screenshots where possible
+- if unavailable, set `ui_concept_artifact_present: false` and `ui_concept_verdict: fail` or `blocked`; do not call it complete
 
-Before Stitch, have at least:
-- product goal
-- target user / use moment
-- core page or flow
-- hierarchy / key sections
-- primary action
-- style direction or constraints
+UI concept acceptance requires rendered evidence in `09-ui-concept/`: Stitch/export HTML/FIG/PDF or local HTML, screenshots, readable labels matching `08-screen-spec.md`, no screenshot sanity failure, no fixed-nav overlap, no lock/copy failures, and no risky unsupported claims.
 
-## Prompt contract
+A markdown/spec dump saved as `.html` is not UI evidence. Judge concept clarity, hierarchy, key-state coverage, and interaction usefulness; production polish is optional.
 
-```markdown
-Product:
-User / use moment:
-Goal:
-Screen(s):
-Hierarchy:
-Primary action:
-Data/content:
-States:
-Style direction:
-Constraints:
-```
+Concept images are separate: actual `gpt-image-2` hero visuals, storyboards, and selected key-screen illustrations live in `09-concept-images/`. They enrich the presentation and may reference `screen_id`, but must never substitute for UI concept evidence.
 
-## Rules
+External Stitch create/generate/edit is an external mutation. Do not mutate external tools without approval.
 
-- use only after a brief/spec exists or the user explicitly asks for rough exploration
-- prompts must include product goal, audience, hierarchy, constraints, and style direction
-- generated output is concept evidence, not source truth
-- do not run the full design repo lifecycle or production repair loop
-- ask before actions that create/edit external Stitch state when policy requires it
-- if Stitch is unavailable, return the prompt and mark `degraded: no Stitch execution`
-- hand concept screens to review before treating them as useful
+Generated UI concept output is not source truth.
