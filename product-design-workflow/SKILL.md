@@ -22,7 +22,7 @@ Workflow:
 3. Write the default evidence pack and structured market wedge before solution work: beachhead segment, excluded users, use moment, opponents/workarounds, pain rows, novelty delta hypothesis, and market gate verdict.
 4. Write sources, standards map, golden workflow, synthesis, concept brief, presentation story, journey, and screen spec with stable `story_moment_id` and `screen_id` values.
 5. Generate and critique real, readable `gpt-image-2` presentation visuals: hero, storyboard, and selected key screens mapped to story/screen IDs.
-6. Enter the Stitch/HTML lane by default for a UI concept artifact; record real artifacts/screenshots or the exact blocker in `09-ui-concept`.
+6. Enter the Stitch/HTML lane by default for a UI concept artifact; record real artifacts/screenshots or the exact blocker in `09-ui-concept`. Screenshots must show the rendered concept, not a blank/error/404 browser page.
 7. Review Apple/HIG-level clarity, WCAG, source-truth match, screenshot sanity, image/UI coherence, novelty, customer pull, risk, and evidence.
 8. Write report, handoff, and promotion verdict.
 9. Finalize deterministically before any extra polish: run `product-design-common/scripts/check_source_links.py <folder>` when `promotion_eligible: true`, save that output as `14-source-link-check.txt`, then run `product-design-common/scripts/check_product_design_run.py <folder>`. The artifact checker writes `13-artifact-check.txt` itself. If time is tight, stop after these checks and report pass/degraded/blocked rather than continuing refinements.

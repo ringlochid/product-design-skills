@@ -201,6 +201,13 @@ def main() -> None:
         add_ui(d)
     run_case("missing_artifact_check_is_generated", True, missing_artifact_check_is_generated)
 
+    def suspicious_large_tiny_ui_screenshot(d: Path) -> None:
+        base_fixture(d, run_status="pass", ui_present=True, ui_verdict="pass", promotion=True)
+        add_ui(d)
+        (d / "09-ui-concept" / "local-viewport.png").unlink()
+        png(d / "09-ui-concept" / "local-viewport.png", 1440, 2000)
+    run_case("suspicious_large_tiny_ui_screenshot_blocks_promotion", False, suspicious_large_tiny_ui_screenshot)
+
     def honest_not_ready(d: Path) -> None:
         base_fixture(d, run_status="blocked", ui_present=False, ui_verdict="blocked", promotion=False)
         add_ui(d, blocked=True)

@@ -332,6 +332,12 @@ if ui_claimed_success:
         errors.append("UI concept success claimed but HTML artifact appears to be markdown/spec text, not rendered UI")
     if not ui_screenshots:
         errors.append("UI concept success claimed but no rendered screenshot image found in 09-ui-concept")
+    for shot in ui_screenshots:
+        shot_size = image_size(shot)
+        if shot_size:
+            w, h = shot_size
+            if w * h >= 1_000_000 and shot.stat().st_size < 50_000:
+                errors.append(f"UI concept screenshot is suspiciously small/blank/404-like for its dimensions: {shot.relative_to(ROOT)} is {w}x{h}, {shot.stat().st_size} bytes")
     if required_labels and htmls:
         visible = "\n".join(html_visible_text(p) for p in htmls).lower()
         missing = [lbl for lbl in required_labels if lbl.lower() not in visible]
