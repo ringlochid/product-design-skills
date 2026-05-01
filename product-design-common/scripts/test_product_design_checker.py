@@ -12,6 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 CHECKER = ROOT / "product-design-common" / "scripts" / "check_product_design_run.py"
 SKELETON = ROOT / "product-design-common" / "scripts" / "create_product_design_skeleton.py"
+SOURCE_READY = ROOT / "product-design-common" / "scripts" / "check_source_readiness.py"
 
 
 def png(path: Path, w: int = 2048, h: int = 1152) -> None:
@@ -192,6 +193,12 @@ def main() -> None:
     tmp = Path(tempfile.mkdtemp(prefix="pd-checker-skeleton-bootstrap-"))
     try:
         skeleton_bootstrap(tmp)
+        readiness = subprocess.run([sys.executable, str(SOURCE_READY), str(tmp)], text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        if readiness.returncode == 0 or "requires at least 5 real http(s) source rows" not in readiness.stdout:
+            print("FAIL source_readiness_blocks_skeleton")
+            print(readiness.stdout)
+            raise SystemExit(1)
+        print("PASS source_readiness_blocks_skeleton")
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
 

@@ -23,11 +23,12 @@ Workflow:
 4. Set `workflow_kind: promotion_concept`; record `ui_concept_requested`, `ui_concept_artifact_present`, and `ui_concept_verdict` honestly.
 5. Write the default evidence pack and structured market wedge before solution work: beachhead segment, excluded users, use moment, opponents/workarounds, pain rows, novelty delta hypothesis, and market gate verdict.
 6. Write sources, standards map, golden workflow, synthesis, concept brief, presentation story, journey, and screen spec with stable `story_moment_id` and `screen_id` values.
-7. **First complete pass before polish:** update critique/report/handoff/verdict from the current evidence before generating extra variants. A complete degraded package beats an incomplete polished package.
-8. Generate and critique real, readable `gpt-image-2` presentation visuals: hero, storyboard, and selected key screens mapped to story/screen IDs.
-9. Enter the Stitch/HTML lane by default for a UI concept artifact; record real artifacts/screenshots or the exact blocker in `09-ui-concept`. Screenshots must show the rendered concept, not a blank/error/404 browser page.
-10. Review Apple/HIG-level clarity, WCAG, source-truth match, screenshot sanity, image/UI coherence, novelty, customer pull, risk, and evidence.
-11. Finalize deterministically before any extra polish: if `promotion_eligible: true`, run `product-design-common/scripts/check_source_links.py <folder>` and save stdout as `14-source-link-check.txt`; then run `product-design-common/scripts/check_product_design_run.py <folder>`. The checker writes `13-artifact-check.txt` itself. Stop after final checks and report pass/degraded/blocked rather than continuing refinements.
+7. **Source gate before visuals/UI:** run `python3 product-design-common/scripts/check_source_readiness.py <folder>`. Do not call image generation or create UI concept artifacts until it passes. If it fails and time is tight, keep the skeleton degraded/blocked and finalize honestly.
+8. **First complete pass before polish:** update critique/report/handoff/verdict from the current evidence before generating extra variants. A complete degraded package beats an incomplete polished package.
+9. Generate and critique real, readable `gpt-image-2` presentation visuals: hero, storyboard, and selected key screens mapped to story/screen IDs.
+10. Enter the Stitch/HTML lane by default for a UI concept artifact; record real artifacts/screenshots or the exact blocker in `09-ui-concept`. Screenshots must show the rendered concept, not a blank/error/404 browser page.
+11. Review Apple/HIG-level clarity, WCAG, source-truth match, screenshot sanity, image/UI coherence, novelty, customer pull, risk, and evidence.
+12. Finalize deterministically before any extra polish: if `promotion_eligible: true`, run `product-design-common/scripts/check_source_links.py <folder>` and save stdout as `14-source-link-check.txt`; then run `product-design-common/scripts/check_product_design_run.py <folder>`. The checker writes `13-artifact-check.txt` itself. Stop after final checks and report pass/degraded/blocked rather than continuing refinements.
 
 Output:
 - run folder path
