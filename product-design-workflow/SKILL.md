@@ -29,6 +29,11 @@ Workflow:
 9. UI phase: route to `stitch-concept-generator`; record real HTML/screenshots or exact blocker in `09-ui-concept`.
 10. Final audit: route critique/handoff to leaves if needed, run source-link check only when promoting, then run `check_product_design_run.py <folder>`; stop after pass/degraded/blocked status.
 
+
+## Orchestrator WBS exposure
+
+For large parent-orchestrated runs, use the phase-orchestration reference as the WBS/package map. This skill exposes deliverable phases and gates; it should not personally perform every leaf task in one pass.
+
 Output:
 - run folder path
 - artifact inventory and pass/fail/degraded/blocked status

@@ -1,26 +1,30 @@
 # Phase Orchestration Rules
 
-The full workflow is an orchestrator/router, not the thinking layer. The conductor is the file manager for the package.
+The full workflow is a WBS orchestrator/router, not the thinking layer. It maps one deliverable into phases, work packages, and gates. The conductor is file manager for files/state; leaves do stage thinking.
 
 Conductor responsibilities:
-- create and own the run folder, skeleton, phase status, and final assembly
-- pass the smallest useful context packet to one leaf at a time
-- copy leaf outputs into contract files, preserving source links and artifact paths
-- run deterministic gates between phases and stop on blocked/degraded status
-- resume from the last completed phase instead of restarting the package
+- own run folder, skeleton, phase status, final assembly
+- pass smallest useful context packet to one leaf/package at a time
+- copy leaf outputs into contract files with source links/artifact paths
+- run deterministic gates and stop on blocked/degraded status
+- resume from last completed phase
 
 Leaf responsibilities:
-- do the stage thinking: market/context, opportunity, journey, screen spec, UI concept, review, or handoff
-- return bounded artifacts, evidence, assumptions, risks, and blockers
+- do bounded market/context, opportunity, journey, screen spec, UI, review, or handoff work
+- return artifacts, evidence, assumptions, risks, blockers
 - never decide promotion eligibility alone
 
-Phases:
-1. `bootstrap`: create skeleton and defaults.
-2. `evidence`: source pack, standards, market wedge, story, journey, screen spec.
-3. `previsual_gate`: run source/previsual readiness; do not generate visuals before pass.
-4. `degraded_finalize`: update critique/report/handoff/verdict from current evidence before slow media.
-5. `visuals`: generate exactly required hero/storyboard/key-screen assets and manifest.
-6. `ui_concept`: create Stitch/HTML artifact or exact blocker.
-7. `final_audit`: run source links if promoting, then final checker.
+WBS phases:
+1. `bootstrap`: skeleton/defaults; package `pd-bootstrap`; gate contract-shaped folder.
+2. `evidence`: sources, standards, wedge, story, journey, screen spec; packages `pd-market`, `pd-opportunity`, `pd-screen`; gate stable source/story/screen IDs.
+3. `previsual_gate`: source/readiness check; package `pd-previsual`; gate pass or degraded stop.
+4. `degraded_finalize`: critique/report/handoff/verdict before slow media; gate complete text package.
+5. `visuals`: required hero/storyboard/key-screen assets; package `pd-visuals`; gate manifest/review.
+6. `ui_concept`: Stitch/HTML artifact or blocker; package `pd-ui`; gate real artifact/screenshot or blocker.
+7. `final_audit`: source links if promoting, checker, verdict; package `pd-final-audit`.
 
-If time is tight, the conductor must finish the current phase and save the next phase, not start slow work.
+Parallelism: evidence packages may run in parallel only with separate ownership and shared IDs. Visuals, UI, and final audit are serial. If time is tight, finish the current phase and save the next package; do not start slow work.
+
+
+Gate proof rule: each phase gate must name the script/check/artifact inspected, pass/degraded/blocked result, and blocker if proof could not run.
+Before spawning, name the smallest useful slice that can satisfy the user if later phases block.
